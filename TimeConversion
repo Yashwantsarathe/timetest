@@ -1,0 +1,28 @@
+public class TimeConversion {
+    public static String convertToMilitaryTime(String timeStr) {
+        String[] components = timeStr.split(":");
+        int hours = Integer.parseInt(components[0]);
+        int minutes = Integer.parseInt(components[1]);
+        int seconds = Integer.parseInt(components[2].substring(0, 2));
+        String amPm = components[2].substring(3);
+
+        if (amPm.equals("AM")) {
+            if (hours == 12) {
+                hours = 0;
+            }
+        } else if (amPm.equals("PM")) {
+            if (hours != 12) {
+                hours += 12;
+            }
+        }
+
+        String militaryTime = String.format("%d:%d:%d", hours, minutes, seconds);
+        return militaryTime;
+    }
+
+    public static void main(String[] args) {
+        String inputTime = "09:30:45 PM";
+        String militaryTime = convertToMilitaryTime(inputTime);
+        System.out.println("Military Time: " + militaryTime);
+    }
+}
